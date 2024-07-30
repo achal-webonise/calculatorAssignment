@@ -77,15 +77,16 @@ const Calculator = () => {
               }
             />
           ))}
-          {mode === "intermediate" &&
-            intermediateButtons.map((label) => (
-              <Button
-                key={label}
-                onClick={handleClick}
-                label={label}
-                className="operator-btn"
-              />
-            ))}
+          {mode === "intermediate"
+            ? intermediateButtons.map((label) => (
+                <Button
+                  key={label}
+                  onClick={handleClick}
+                  label={label}
+                  className="operator-btn"
+                />
+              ))
+            : null}
         </div>
         <button className="toggle-button" onClick={toggleMode}>
           Switch to {mode === "simple" ? "Intermediate" : "Simple"} Mode
@@ -94,9 +95,13 @@ const Calculator = () => {
       <div className="history">
         <h2>History</h2>
         <ul>
-          {history.map((item, index) => (
-            <HistoryItem key={index} item={item} />
-          ))}
+          {history.length > 0 ? (
+            history.map((item, index) => (
+              <HistoryItem key={index} item={item} />
+            ))
+          ) : (
+            <li>No history</li>
+          )}
         </ul>
       </div>
     </div>
